@@ -1,0 +1,32 @@
+{% extends "../base.html" %} {% block title %} {{ entity }}
+{%endblock %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %} {% block content %}
+<div class="align-center col-10 offset-1 py-5">
+    <div class="d-flex justify-content-between align-item-center">
+        <p class="lead ml-0">Mes films</p>
+        <div class="form-group">
+            <form action="" class="d-flex align-item-center" autocomplete="off">
+                {% csrf_token %}
+                <input type="text" name="name" class="form-control me-2" hx-post="check_name" hx-swap="outerhtml" hx-trigger="keyup"
+                hx-target="#name-error" />
+                <button type="submit" hx-post="{% url 'movie:add_film' %}" hx-target="#film-list" class="btn btn-success btn-sm"
+                    >Ajouter</button>
+            </form>
+            <div id="name-error"></div>
+        </div>
+    </div>
+    <hr />
+    <div id="film-list">
+        {% include 'movies/partials/films_list.html' %}
+    </div>
+
+</div>
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

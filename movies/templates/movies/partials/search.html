@@ -1,0 +1,6 @@
+<div class="d-flex justify-content-end mb-3">
+    {% csrf_token %}
+    <input type="text" autocomplete="off" hx-post="{% url 'movie:search_film' %}" hx-target="#results" hx-trigger="keyup changed delay:250ms" name="search" class="form-control mr-2" placeholder="Entrer le nom du film">
+    </form>
+</div>
+<div id="results"></div>
