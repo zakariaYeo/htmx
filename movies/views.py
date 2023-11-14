@@ -43,12 +43,11 @@ def add_film(request):
     if Movies.objects.filter(name__iexact=name).exists():
         messages.ERROR(request, f'{name} existe déjà.')
     else:
-        film = Movies.objects.create(name=name)
-    films = Movies.objects.all()
-    # request.user.film.add(film)    
+        film = Movies.objects.get_or_create(name=name)[0]
+    #request.user.film.add(film)    
 
     context = {
-        'films': films,
+        'films': Movies.objects.all(),
 
     }
     return render(request, 'movies/partials/films_list.html', context)

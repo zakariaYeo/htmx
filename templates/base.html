@@ -32,9 +32,10 @@
     </script>
 
     <!-- HTMX -->
-    <script src="https://unpkg.com/htmx.org@1.6.0"
-        integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D" crossorigin="anonymous">
-    </script>
+    <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
+    
+    <!-- ALPINE JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- FONT AWSOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -45,7 +46,7 @@
 
 </head>
 
-<body class="c-app">
+<body class="c-app" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     <div class="c-wrapper c-fixed-components">
         {% include 'navbar.html' %}
         <div class="c-body">
@@ -53,11 +54,6 @@
         </div>
 
     </div>
-    <script>
-        document.body.addEventListener('htmx:configRequest', (event) => {
-            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-        })
-    </script>
     <!-- Specific Page JS goes HERE  -->
     {% block javascripts %}
     {% endblock javascripts %}

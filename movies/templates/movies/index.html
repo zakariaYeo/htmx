@@ -1,5 +1,5 @@
 {% extends "../base.html" %} {% block title %} {{ entity }}
-{%endblock %}
+{% endblock %}
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 
@@ -8,12 +8,15 @@
     <div class="d-flex justify-content-between align-item-center">
         <p class="lead ml-0">Mes films</p>
         <div class="form-group">
-            <form action="" class="d-flex align-item-center" autocomplete="off">
+            <form action="" class="d-flex align-item-center" autocomplete="off" x-data="{ name: '' }">
                 {% csrf_token %}
-                <input type="text" name="name" class="form-control me-2" hx-post="check_name" hx-swap="outerhtml" hx-trigger="keyup"
+                <input type="text" name="name" x-model="name" class="form-control me-2" hx-post="check_name" hx-swap="outerhtml" hx-trigger="keyup"
                 hx-target="#name-error" />
                 <button type="submit" hx-post="{% url 'movie:add_film' %}" hx-target="#film-list" class="btn btn-success btn-sm"
-                    >Ajouter</button>
+            x-bind:disabled="name.trim() === ''"
+        >
+            Ajouter
+        </button>
             </form>
             <div id="name-error"></div>
         </div>
@@ -22,9 +25,7 @@
     <div id="film-list">
         {% include 'movies/partials/films_list.html' %}
     </div>
-
 </div>
-
 {% endblock content %}
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
